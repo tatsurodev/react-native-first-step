@@ -9,10 +9,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ArticleScreen() {
+export default function ArticleScreen({ route }) {
+  // route.paramsで渡されたparameterを取得
+  const { article } = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
-      <WebView source={{ uri: 'https://expo.dev/' }} />
+      <WebView source={{ uri: article.url }} />
     </SafeAreaView>
   );
 }

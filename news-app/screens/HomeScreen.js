@@ -44,8 +44,8 @@ export default function HomeScreen({ navigation }) {
             imageUrl={item.urlToImage}
             title={item.title}
             author={item.author}
-            // navigateの引数はStack.Screenで指定したnameを指定する
-            onPress={() => navigation.navigate('Article')}
+            // navigateの引数はStack.Screenで指定したnameを指定する、第二引数に渡したい変数の値をkey: valueのobjectで渡す
+            onPress={() => navigation.navigate('Article', { article: item })}
           />
         )}
         // keyの形式はstringであることが必須
