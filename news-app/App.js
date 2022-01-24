@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from './components/ListItem';
-import articles from './dummies/articles';
+import dummyArticles from './dummies/articles';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +35,8 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
+  const [articles, setArticles] = useState(dummyArticles);
+
   return (
     // スマホの表示領域内に適切に表示する
     <SafeAreaView style={styles.container}>
