@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from './components/ListItem';
@@ -35,7 +35,16 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  const [articles, setArticles] = useState(dummyArticles);
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    alert('called!');
+    const timer = setTimeout(() => {
+      setArticles(dummyArticles);
+    }, 2000);
+    // unmount時に実行するclean up関数をreturn
+    return () => clearTimeout(timer);
+    // dependencyを配列内に指定、空でmount時のみ実行
+  }, []);
 
   return (
     // スマホの表示領域内に適切に表示する
