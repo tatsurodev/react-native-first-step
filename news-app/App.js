@@ -4,6 +4,9 @@ import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from './components/ListItem';
 import dummyArticles from './dummies/articles';
 import Constants from 'expo-constants';
+import axios from 'axios';
+
+const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
 const styles = StyleSheet.create({
   container: {
@@ -39,14 +42,19 @@ export default function App() {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     // Constants.manifest.keyでaccess可
-    alert(Constants.manifest.extra.newsApiKey);
-    const timer = setTimeout(() => {
-      setArticles(dummyArticles);
-    }, 2000);
+    // alert(Constants.manifest.extra.newsApiKey);
     // unmount時に実行するclean up関数をreturn
-    return () => clearTimeout(timer);
+    fetchArticles();
     // dependencyを配列内に指定、空でmount時のみ実行
   }, []);
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get(URL);
+      setArticles(response.data.articles);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     // スマホの表示領域内に適切に表示する
