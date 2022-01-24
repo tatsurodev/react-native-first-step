@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from './components/ListItem';
 import articles from './dummies/articles';
 
@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   itemContainer: {
     height: 100,
@@ -36,15 +34,23 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  const items = articles.map((article, index) => {
-    return (
-      <ListItem
-        imageUrl={article.urlToImage}
-        title={article.title}
-        author={article.author}
-        key={index}
+  return (
+    // スマホの表示領域内に適切に表示する
+    <SafeAreaView style={styles.container}>
+      {/* 配列dataをrender */}
+      <FlatList
+        data={articles}
+        // dataで指定した各要素がitemに格納
+        renderItem={({ item }) => (
+          <ListItem
+            imageUrl={item.urlToImage}
+            title={item.title}
+            author={item.author}
+          />
+        )}
+        // keyの形式はstringであることが必須
+        keyExtractor={(item, index) => index.toString()}
       />
-    );
-  });
-  return <View style={styles.container}>{items}</View>;
+    </SafeAreaView>
+  );
 }
