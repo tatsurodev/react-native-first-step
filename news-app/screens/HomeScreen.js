@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
 
 const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
-export default function HomeScreen() {
+// propsにnavigationがsetされている
+export default function HomeScreen({ navigation }) {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     // Constants.manifest.keyでaccess可
@@ -43,6 +44,8 @@ export default function HomeScreen() {
             imageUrl={item.urlToImage}
             title={item.title}
             author={item.author}
+            // navigateの引数はStack.Screenで指定したnameを指定する
+            onPress={() => navigation.navigate('Article')}
           />
         )}
         // keyの形式はstringであることが必須
