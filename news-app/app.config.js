@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export default {
   name: 'news-app',
   slug: 'news-app',
@@ -24,5 +26,8 @@ export default {
   },
   web: {
     favicon: './assets/favicon.png',
+  },
+  extra: {
+    newsApiKey: process.env.NEWS_API_KEY,
   },
 };
