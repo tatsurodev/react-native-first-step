@@ -16,12 +16,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   leftContainer: {
-    backgroundColor: 'red',
     width: 100,
   },
   rightContainer: {
-    backgroundColor: 'blue',
     flex: 1,
+    flexDirection: 'column',
   },
 });
 
@@ -35,7 +34,15 @@ export default function App() {
             source={{ uri: 'https://picsum.photos/id/10/200/200' }}
           />
         </View>
-        <View style={styles.rightContainer}></View>
+        <View style={styles.rightContainer}>
+          <Text numberOfLines={3}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sit,
+            architecto tenetur enim aliquam officia explicabo unde facere totam
+            sequi molestiae. Eum, ex? Velit minus aspernatur nihil, quae dolorum
+            voluptatibus?
+          </Text>
+          <Text>ReactNews</Text>
+        </View>
       </View>
     </View>
   );
