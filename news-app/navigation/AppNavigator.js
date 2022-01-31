@@ -27,6 +27,8 @@ const ClipStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Clip" component={ClipScreen} />
+      {/* clipの下にarticleを配置することでclipからarticleに遷移した時にtabがclipのままになる */}
+      <Stack.Screen name="Article" component={ArticleScreen} />
     </Stack.Navigator>
   );
 };
