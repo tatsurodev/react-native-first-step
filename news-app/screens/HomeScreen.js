@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from '../components/ListItem';
+import Loading from '../components/Loading';
 import Constants from 'expo-constants';
 import axios from 'axios';
 
@@ -16,6 +17,7 @@ const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&a
 // propsにnavigationがsetされている
 export default function HomeScreen({ navigation }) {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     // Constants.manifest.keyでaccess可
     // alert(Constants.manifest.extra.newsApiKey);
@@ -24,12 +26,14 @@ export default function HomeScreen({ navigation }) {
     // dependencyを配列内に指定、空でmount時のみ実行
   }, []);
   const fetchArticles = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(URL);
       setArticles(response.data.articles);
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
@@ -51,6 +55,7 @@ export default function HomeScreen({ navigation }) {
         // keyの形式はstringであることが必須
         keyExtractor={(item, index) => index.toString()}
       />
+      {loading && <Loading />}
     </SafeAreaView>
   );
 }
