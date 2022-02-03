@@ -16,7 +16,9 @@ export default {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    supportsTablet: true,
+    supportsTablet: false,
+    // 一般的にdomainを逆から並べたものが多い
+    bundleIdentifier: 'com.zelohas.news-app',
   },
   android: {
     adaptiveIcon: {
